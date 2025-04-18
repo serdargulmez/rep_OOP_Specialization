@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 void printMenu()
@@ -91,24 +92,46 @@ int main()
 {
     cout << "--- Program Started ! ---" << endl;
     
-    double price = 5319.450228;
-    double amount = 0.00020075;
-
-    string timestamp{"2020/03/17 17:01:24.884492"};
-    string product{"BTC/USDT"};
-    string orderType{"Bid"};
-
     enum class OrderBookType{bid, ask};
-    OrderBookType orderType = OrderBookType::bid;
+
+    // double price = 5319.450228;
+    // double amount = 0.00020075;
+    // string timestamp{"2020/03/17 17:01:24.884492"};
+    // string product{"BTC/USDT"};
+    // OrderBookType orderType = OrderBookType::ask;
+
+    vector<double> prices;    
+    vector<double> amounts;
+    vector<string> timestamps;
+    vector<string> products;
+    vector<OrderBookType> orderTypes;
+
+    prices.push_back(234.56);
+    amounts.push_back(34.6);
+    timestamps.push_back("2020/03/17 17:01:24.884492");
+    products.push_back("BTC/USDT");
+    orderTypes.push_back(OrderBookType::bid);
+
+    prices.push_back(15.7);
+    amounts.push_back(2.6);
+    timestamps.push_back("2020/03/17 17:01:24.884492");
+    products.push_back("BTC/USDT");
+    orderTypes.push_back(OrderBookType::ask);
 
 
 
-    while (true)
-    {
-        printMenu();
-        int userOption = getUserOption();
-        processUserOption(userOption);
-    }
+
+    cout << "prices: " << prices[0] << endl;
+    cout << "prices: " << prices[1] << endl;
+
+
+
+    // while (true)
+    // {
+    //     printMenu();
+    //     int userOption = getUserOption();
+    //     processUserOption(userOption);
+    // }
 
     return 0;
 }
