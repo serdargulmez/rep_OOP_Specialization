@@ -6,6 +6,7 @@
 */
 
 #include <iostream>
+#include <string>
 using namespace std;
 
 void printMenu()
@@ -89,6 +90,15 @@ void processUserOption(int userOption)
 int main()
 {
     cout << "--- Program Started ! ---" << endl;
+    
+    double price = 5319.450228;
+    double amount = 0.00020075;
+
+    string timestamp{"2020/03/17 17:01:24.884492"};
+    string product{"BTC/USDT"};
+    string orderType{"Bid"};
+
+
 
     while (true)
     {
