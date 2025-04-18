@@ -21,13 +21,14 @@ class OrderBookEntry
                        string _timestamp,
                        string _product,
                        OrderBookType _orderType)
+        :price(_price),
+         amount(_amount),
+         timestamp(_timestamp),
+         product(_product),
+         orderType(_orderType)
+
         {
-            // this->price = _price; // It might be used.Same result.
-            price = _price;
-            amount = _amount;
-            timestamp = _timestamp;
-            product = _product;
-            orderType = _orderType;
+       
         }
 
 
