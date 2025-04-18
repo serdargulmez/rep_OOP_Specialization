@@ -98,6 +98,9 @@ int main()
     string product{"BTC/USDT"};
     string orderType{"Bid"};
 
+    enum class OrderBookType{bid, ask};
+    OrderBookType orderType = OrderBookType::bid;
+
 
 
     while (true)
