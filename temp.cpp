@@ -35,7 +35,7 @@
 //     cout << "size of spectra_03: " << sizeof(spectra_03) << endl;
 
 //     cout << "-----------------------------------------------------------------" << endl;
-    
+
 //     cout << "spectra_04: " << spectra_04 << endl;
 //     cout << "size of spectra_04: " << sizeof(spectra_04) << endl;
 
@@ -56,10 +56,8 @@
 
 //     cout << "-----------------------------------------------------------------" << endl;
 
-    
 //     return 0;
 // }
-
 
 /*
 
@@ -74,7 +72,7 @@
 //     unsigned short i = 65537;
 //     unsigned a{4};
 //     signed long b{45};
-    
+
 //     cout << "The size of 'unsigned short' is: " << sizeof(unsigned short) << endl;
 //     cout << "i contains: " << i << endl;
 //     cout << "The size of 'unsigned' is: " << sizeof(unsigned) << endl;
@@ -88,26 +86,52 @@
 
 */
 
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// enum class Colours{red, blue, white};
+
+// int main()
+// {
+//     string s = "Hello";
+
+//     // float f = 1.5; // it would be double if 'f' was not added to end of numbers!
+//     float f = 1.5f; // 32 bits - 4 bytes
+
+//     double d = 1.5; // it normal double 64 bits - 8 bytes
+
+//     cout << "size of float: " << sizeof(float) << endl;
+//     cout << "size of double: " << sizeof(double) << endl;
+
+//     return 0;
+// }
+
+/*
+    concepts of class
+
+*/
+
 #include <iostream>
-#include <string>
+#include<vector>
 using namespace std;
 
-enum class Colours{red, blue, white};
+class Vec3D
+{
+    private:
+        int x;
+        int y;
+        int z;
+};
+
+Vec3D vec1;
 
 int main()
-{
-    string s = "Hello";
-    
-    // float f = 1.5; // it would be double if 'f' was not added to end of numbers!
-    float f = 1.5f; // 32 bits - 4 bytes
-    
-    double d = 1.5; // it normal double 64 bits - 8 bytes
+{  
 
-    cout << "size of float: " << sizeof(float) << endl;
-    cout << "size of double: " << sizeof(double) << endl;
-
+    vec1.x = 23;
+    vec1.y = 12;
+    vec1.z = 13;
 
     return 0;
 }
-
-
