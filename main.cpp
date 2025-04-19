@@ -30,8 +30,7 @@ class OrderBookEntry
         {
        
         }
-
-
+        
         double price;
         double amount;
         string timestamp;
@@ -162,13 +161,21 @@ int main()
     //     processUserOption(userOption);
     // }
 
-    OrderBookEntry order1{1000,
-                          0.002,
-                          "2020/03/17 17:01:24.884492",
-                          "BTC/USDT",
-                          OrderBookType::bid};
+    vector<OrderBookEntry> orders;
+    
+    orders.push_back(OrderBookEntry{1000,
+                                    0.002,
+                                    "2020/03/17 17:01:24.884492",
+                                    "BTC/USDT",
+                                    OrderBookType::bid} );
 
-    cout << "The price is " << order1.price << "." << endl;
+    orders.push_back(OrderBookEntry{2000,
+                                    0.002,
+                                    "2020/03/17 17:01:24.884492",
+                                    "BTC/USDT",
+                                    OrderBookType::bid} );
+    
+    cout << "The price is " << orders[1].price << "." << endl;
 
     return 0;
 }
