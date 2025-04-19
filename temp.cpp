@@ -118,20 +118,25 @@ using namespace std;
 
 class Vec3D
 {
-    private:
+    public:
         int x;
         int y;
         int z;
 };
 
-Vec3D vec1;
+
 
 int main()
 {  
-
+    Vec3D vec1;
     vec1.x = 23;
     vec1.y = 12;
     vec1.z = 13;
+
+    vector<Vec3D> coords;
+    coords.push_back(vec1);
+    
+    cout << "coords[0]: " << coords[0].x << endl;
 
     return 0;
 }
