@@ -10,32 +10,34 @@
 #include <vector>
 using namespace std;
 
-enum class OrderBookType{bid, ask};
+enum class OrderBookType
+{
+    bid,
+    ask
+};
 
 class OrderBookEntry
 {
-    public:
+public:
+    OrderBookEntry(double _price,
+                   double _amount,
+                   string _timestamp,
+                   string _product,
+                   OrderBookType _orderType)
+        : price(_price),
+          amount(_amount),
+          timestamp(_timestamp),
+          product(_product),
+          orderType(_orderType)
 
-        OrderBookEntry(double _price,
-                       double _amount,
-                       string _timestamp,
-                       string _product,
-                       OrderBookType _orderType)
-        :price(_price),
-         amount(_amount),
-         timestamp(_timestamp),
-         product(_product),
-         orderType(_orderType)
+    {
+    }
 
-        {
-       
-        }
-        
-        double price;
-        double amount;
-        string timestamp;
-        string product;
-        OrderBookType orderType;
+    double price;
+    double amount;
+    string timestamp;
+    string product;
+    OrderBookType orderType;
 };
 
 void printMenu()
@@ -119,7 +121,7 @@ void processUserOption(int userOption)
 int main()
 {
     cout << "--- Program Started ! ---" << endl;
-    
+
     // enum class OrderBookType{bid, ask};
 
     // double price = 5319.450228;
@@ -128,7 +130,7 @@ int main()
     // string product{"BTC/USDT"};
     // OrderBookType orderType = OrderBookType::ask;
 
-    // vector<double> prices;    
+    // vector<double> prices;
     // vector<double> amounts;
     // vector<string> timestamps;
     // vector<string> products;
@@ -146,13 +148,8 @@ int main()
     // products.push_back("BTC/USDT");
     // orderTypes.push_back(OrderBookType::ask);
 
-
-
-
     // cout << "prices: " << prices[0] << endl;
     // cout << "prices: " << prices[1] << endl;
-
-
 
     // while (true)
     // {
@@ -162,20 +159,46 @@ int main()
     // }
 
     vector<OrderBookEntry> orders;
-    
+
     orders.push_back(OrderBookEntry{1000,
                                     0.002,
                                     "2020/03/17 17:01:24.884492",
                                     "BTC/USDT",
-                                    OrderBookType::bid} );
+                                    OrderBookType::bid});
 
     orders.push_back(OrderBookEntry{2000,
                                     0.002,
                                     "2020/03/17 17:01:24.884492",
                                     "BTC/USDT",
-                                    OrderBookType::bid} );
-    
-    cout << "The price is " << orders[1].price << "." << endl;
+                                    OrderBookType::bid});
+
+    // cout << "The price is " << orders[1].price << "." << endl;
+
+    //> copy of orders items and writing
+    // for (OrderBookEntry order : orders)
+    // {
+    //     cout << "The price is " << order.price << "." << endl;
+
+    // }
+
+    //> using references instead of copying variables
+    for (OrderBookEntry& order : orders)
+    {
+        cout << "The price is " << order.price << "." << endl;
+
+    }
+
+    //> classic style
+    for (unsigned int i = 0; i < orders.size(); ++i)
+    {
+        cout << "The price is " << orders[i].price << "." << endl;
+    }
+
+    //> at syntax 
+    for (unsigned int i = 0; i < orders.size(); ++i)
+    {
+        cout << "The price is " << orders.at(i).price << "." << endl;
+    }
 
     return 0;
 }
