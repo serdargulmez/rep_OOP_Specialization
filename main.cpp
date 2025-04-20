@@ -8,8 +8,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
+//  2020/03/17 17:01:24.884492,BTC/USDT,bid,5319.450228,0.00020075
 enum class OrderBookType
 {
     bid,
@@ -23,15 +25,7 @@ public:
                    double _amount,
                    string _timestamp,
                    string _product,
-                   OrderBookType _orderType)
-        : price(_price),
-          amount(_amount),
-          timestamp(_timestamp),
-          product(_product),
-          orderType(_orderType)
-
-    {
-    }
+                   OrderBookType _orderType);
 
     double price;
     double amount;
@@ -39,6 +33,19 @@ public:
     string product;
     OrderBookType orderType;
 };
+
+OrderBookEntry::OrderBookEntry(double _price,
+                               double _amount,
+                               string _timestamp,
+                               string _product,
+                               OrderBookType _orderType)
+    : price(_price),
+      amount(_amount),
+      timestamp(_timestamp),
+      product(_product),
+      orderType(_orderType)
+{
+}
 
 void printMenu()
 {
@@ -118,38 +125,96 @@ void processUserOption(int userOption)
     }
 }
 
+double computeAveragePrice(vector<OrderBookEntry> entries)
+{
+    double sum = 0.0;
+    for (OrderBookEntry &e : entries)
+    {
+        sum += e.price;
+    }
+
+    double average = sum / entries.size();
+    return average;
+}
+
+double computeLowPrice(vector<OrderBookEntry> entries)
+{
+    vector<double> prices;
+    double minValue;
+    for (OrderBookEntry &e : entries)
+    {
+        prices.push_back(e.price);
+    }
+
+    minValue = *min_element(prices.begin(), prices.end());
+    return minValue;
+}
+
+double computeHighPrice(vector<OrderBookEntry> entries)
+{
+    vector<double> prices;
+    double maxValue;
+    for (OrderBookEntry &e : entries)
+    {
+        prices.push_back(e.price);
+    }
+
+    maxValue = *max_element(prices.begin(), prices.end());
+    return maxValue;
+}
+
+double computePriceSpread(double maxValue, double minValue)
+{
+    return maxValue - minValue; 
+}
+
 int main()
 {
     cout << "--- Program Started ! ---" << endl;
 
-    // enum class OrderBookType{bid, ask};
+    //  2020/03/17 17:01:24.884492,BTC/USDT,bid,5319.450228,0.00020075
 
-    // double price = 5319.450228;
-    // double amount = 0.00020075;
-    // string timestamp{"2020/03/17 17:01:24.884492"};
-    // string product{"BTC/USDT"};
-    // OrderBookType orderType = OrderBookType::ask;
+    OrderBookEntry obe1{8,
+                        7.44564869,
+                        "2020/03/17 17:01:24.884492",
+                        "ETH/BTC",
+                        OrderBookType::bid};
 
-    // vector<double> prices;
-    // vector<double> amounts;
-    // vector<string> timestamps;
-    // vector<string> products;
-    // vector<OrderBookType> orderTypes;
+    OrderBookEntry obe2{2,
+                        7.44564869,
+                        "2020/03/17 17:01:24.884492",
+                        "ETH/BTC",
+                        OrderBookType::bid};
 
-    // prices.push_back(234.56);
-    // amounts.push_back(34.6);
-    // timestamps.push_back("2020/03/17 17:01:24.884492");
-    // products.push_back("BTC/USDT");
-    // orderTypes.push_back(OrderBookType::bid);
+    OrderBookEntry obe3{6,
+                        7.44564869,
+                        "2020/03/17 17:01:24.884492",
+                        "ETH/BTC",
+                        OrderBookType::ask};
 
-    // prices.push_back(15.7);
-    // amounts.push_back(2.6);
-    // timestamps.push_back("2020/03/17 17:01:24.884492");
-    // products.push_back("BTC/USDT");
-    // orderTypes.push_back(OrderBookType::ask);
+    OrderBookEntry obe4{4,
+                        7.44564869,
+                        "2020/03/17 17:01:24.884492",
+                        "ETH/BTC",
+                        OrderBookType::ask};
 
-    // cout << "prices: " << prices[0] << endl;
-    // cout << "prices: " << prices[1] << endl;
+    vector<OrderBookEntry> entries;
+    entries.push_back(obe1);
+    entries.push_back(obe2);
+    entries.push_back(obe3);
+    entries.push_back(obe4);
+
+    // cout << "The obe1 of prices is: " << entries[0].price << endl;
+
+    double minValue = computeLowPrice(entries);
+    double maxValue = computeHighPrice(entries);
+    double average = computeAveragePrice(entries);
+    double priceSpread = computePriceSpread(maxValue, minValue);
+
+    cout << "The average of prices is: " << average << endl;
+    cout << "The min value of prices is: " << minValue << endl;
+    cout << "The max value of prices is: " << maxValue << endl;
+    cout << "The price spread value of prices is: " << priceSpread << endl;
 
     // while (true)
     // {
@@ -157,48 +222,6 @@ int main()
     //     int userOption = getUserOption();
     //     processUserOption(userOption);
     // }
-
-    vector<OrderBookEntry> orders;
-
-    orders.push_back(OrderBookEntry{1000,
-                                    0.002,
-                                    "2020/03/17 17:01:24.884492",
-                                    "BTC/USDT",
-                                    OrderBookType::bid});
-
-    orders.push_back(OrderBookEntry{2000,
-                                    0.002,
-                                    "2020/03/17 17:01:24.884492",
-                                    "BTC/USDT",
-                                    OrderBookType::bid});
-
-    // cout << "The price is " << orders[1].price << "." << endl;
-
-    //> copy of orders items and writing
-    // for (OrderBookEntry order : orders)
-    // {
-    //     cout << "The price is " << order.price << "." << endl;
-
-    // }
-
-    //> using references instead of copying variables
-    for (OrderBookEntry& order : orders)
-    {
-        cout << "The price is " << order.price << "." << endl;
-
-    }
-
-    //> classic style
-    for (unsigned int i = 0; i < orders.size(); ++i)
-    {
-        cout << "The price is " << orders[i].price << "." << endl;
-    }
-
-    //> at syntax 
-    for (unsigned int i = 0; i < orders.size(); ++i)
-    {
-        cout << "The price is " << orders.at(i).price << "." << endl;
-    }
 
     return 0;
 }
