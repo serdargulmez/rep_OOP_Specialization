@@ -6,6 +6,8 @@ public:
     MerkelMain();
     //** Call this to start sim */
     void init();
+
+private:
     void printMenu();
     void printHelp();
     void printMarketStats();
