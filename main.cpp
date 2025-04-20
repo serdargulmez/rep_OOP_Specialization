@@ -9,43 +9,8 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include "OrderBookEntry.h"
 using namespace std;
-
-//  2020/03/17 17:01:24.884492,BTC/USDT,bid,5319.450228,0.00020075
-enum class OrderBookType
-{
-    bid,
-    ask
-};
-
-class OrderBookEntry
-{
-public:
-    OrderBookEntry(double _price,
-                   double _amount,
-                   string _timestamp,
-                   string _product,
-                   OrderBookType _orderType);
-
-    double price;
-    double amount;
-    string timestamp;
-    string product;
-    OrderBookType orderType;
-};
-
-OrderBookEntry::OrderBookEntry(double _price,
-                               double _amount,
-                               string _timestamp,
-                               string _product,
-                               OrderBookType _orderType)
-    : price(_price),
-      amount(_amount),
-      timestamp(_timestamp),
-      product(_product),
-      orderType(_orderType)
-{
-}
 
 void printMenu()
 {
@@ -165,46 +130,34 @@ double computeHighPrice(vector<OrderBookEntry> entries)
 
 double computePriceSpread(double maxValue, double minValue)
 {
-    return maxValue - minValue; 
+    return maxValue - minValue;
 }
 
 int main()
 {
     cout << "--- Program Started ! ---" << endl;
 
-    //  2020/03/17 17:01:24.884492,BTC/USDT,bid,5319.450228,0.00020075
-
-    OrderBookEntry obe1{8,
-                        7.44564869,
-                        "2020/03/17 17:01:24.884492",
-                        "ETH/BTC",
-                        OrderBookType::bid};
-
-    OrderBookEntry obe2{2,
-                        7.44564869,
-                        "2020/03/17 17:01:24.884492",
-                        "ETH/BTC",
-                        OrderBookType::bid};
-
-    OrderBookEntry obe3{6,
-                        7.44564869,
-                        "2020/03/17 17:01:24.884492",
-                        "ETH/BTC",
-                        OrderBookType::ask};
-
-    OrderBookEntry obe4{4,
-                        7.44564869,
-                        "2020/03/17 17:01:24.884492",
-                        "ETH/BTC",
-                        OrderBookType::ask};
-
     vector<OrderBookEntry> entries;
-    entries.push_back(obe1);
-    entries.push_back(obe2);
-    entries.push_back(obe3);
-    entries.push_back(obe4);
+    entries.push_back(OrderBookEntry{8,
+                                     7.44564869,
+                                     "2020/03/17 17:01:24.884492",
+                                     "ETH/BTC",
+                                     OrderBookType::bid});
+    entries.push_back(OrderBookEntry{2,
+                                     7.44564869,
+                                     "2020/03/17 17:01:24.884492",
+                                     "ETH/BTC",
+                                     OrderBookType::bid});
+    entries.push_back(OrderBookEntry{6,
+                                     7.44564869,
+                                     "2020/03/17 17:01:24.884492",
+                                     "ETH/BTC",
+                                     OrderBookType::ask});
 
-    // cout << "The obe1 of prices is: " << entries[0].price << endl;
+    for (OrderBookEntry& e : entries)
+    {
+        cout << "e: " << e.price << endl;
+    }                                     
 
     double minValue = computeLowPrice(entries);
     double maxValue = computeHighPrice(entries);
