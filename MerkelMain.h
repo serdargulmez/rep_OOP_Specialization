@@ -9,7 +9,7 @@ public:
     MerkelMain();
     //** Call this to start sim */
     void init();
-    
+
 private:
     void loadOrderBook();
     void printMenu();
