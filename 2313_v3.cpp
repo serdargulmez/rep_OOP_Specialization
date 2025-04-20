@@ -127,6 +127,23 @@ void processUserOption(int userOption)
     }
 }
 
+double computeAveragePrice(vector<OrderBookEntry> entries)
+{
+    
+}
+
+double computeLowPrice(vector<OrderBookEntry> entries)
+{
+    
+}
+
+double computeHighPrice(vector<OrderBookEntry> entries)
+{
+
+}
+
+
+
 int main()
 {
     cout << "--- Program Started ! ---" << endl;
