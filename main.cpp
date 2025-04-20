@@ -15,7 +15,7 @@ int main()
     cout << "--- Program Started ! ---" << endl;
 
     MerkelMain app{};
-    app.printMenu();
+    app.init();
     
     return 0;
 }
