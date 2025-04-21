@@ -139,33 +139,37 @@ double computeAveragePrice(vector<OrderBookEntry> entries)
 
 double computeLowPrice(vector<OrderBookEntry> entries)
 {
-    vector<double> prices;
-    double minValue;
+    double minValue = entries[0].price;
     for (OrderBookEntry &e : entries)
     {
-        prices.push_back(e.price);
+        if(e.price < minValue)
+        {
+            minValue = e.price;
+        }
+        
     }
 
-    minValue = *min_element(prices.begin(), prices.end());
     return minValue;
 }
 
 double computeHighPrice(vector<OrderBookEntry> entries)
 {
-    vector<double> prices;
-    double maxValue;
+    double maxValue = entries[0].price;
     for (OrderBookEntry &e : entries)
     {
-        prices.push_back(e.price);
+        if(e.price > maxValue)
+        {
+            maxValue = e.price;
+        }
+        
     }
 
-    maxValue = *max_element(prices.begin(), prices.end());
     return maxValue;
 }
 
-double computePriceSpread(double maxValue, double minValue)
+double computePriceSpread(vector<OrderBookEntry> entries)
 {
-    return maxValue - minValue; 
+    return computeHighPrice(entries) - computeLowPrice(entries); 
 }
 
 int main()
@@ -209,7 +213,7 @@ int main()
     double minValue = computeLowPrice(entries);
     double maxValue = computeHighPrice(entries);
     double average = computeAveragePrice(entries);
-    double priceSpread = computePriceSpread(maxValue, minValue);
+    double priceSpread = computePriceSpread(entries);
 
     cout << "The average of prices is: " << average << endl;
     cout << "The min value of prices is: " << minValue << endl;
