@@ -24,7 +24,7 @@ public:
                    string _timestamp,
                    string _product,
                    OrderBookType _orderType)
-        : price(_price),
+        : price{_price},
           amount(_amount),
           timestamp(_timestamp),
           product(_product),
@@ -159,6 +159,8 @@ int main()
     // }
 
     vector<OrderBookEntry> orders;
+
+    
 
     orders.push_back(OrderBookEntry{1000,
                                     0.002,
