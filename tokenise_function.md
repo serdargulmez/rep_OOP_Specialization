@@ -1,4 +1,5 @@
 ### tokenise CSV
+### This is a pseudocode algorithm example.
 
 string csvLine = 'thing,thing2,thing3'  ## the string we are processing
 
