@@ -9,6 +9,5 @@ int main()
     std::string s = "asdasd";
     d = std::stod(s);
     std::cout << "d: " << d << std::endl;
-
     return 0;
 }
