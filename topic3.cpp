@@ -5,9 +5,19 @@
 
 int main()
 {
-    double d;
+    double d = 0;
     std::string s = "asdasd";
-    d = std::stod(s);
+
+    try{
+
+        d = std::stod(s);
+    
+    }catch(const std::exception& e)
+    {
+        
+    }
+    
     std::cout << "d: " << d << std::endl;
+    
     return 0;
 }
