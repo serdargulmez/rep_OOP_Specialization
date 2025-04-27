@@ -48,17 +48,32 @@ int main()
     //     std::cout << t << std::endl;
     // }
 
-    std::ifstream csvFile{"Tokenising.csv"};
+    std::ifstream csvFile{"Tokenising_test.csv"};
     std::string line;
+    std::vector<std::string> tokens;
+
     if (csvFile.is_open())
     {
         std::cout << "File opened..." << std::endl;
 
         unsigned int lineCount = 0;
+
         while (std::getline(csvFile, line))
         {
             lineCount++;
             std::cout << "Read line: " << line << std::endl;
+            tokens = tokenise(line, ',');
+
+            if(tokens.size() != 5)  // wrong line type
+            {
+                std::cout << "This line has error!" << std::endl;
+                continue;
+            }
+
+            for(std::string& t : tokens)
+            {
+                std::cout << t << std::endl;
+            }
         }
 
         std::cout << "total line count: " << lineCount << std::endl;
