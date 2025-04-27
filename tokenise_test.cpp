@@ -49,10 +49,19 @@ int main()
     // }
 
     std::ifstream csvFile{"Tokenising.csv"};
-
+    std::string line;
     if (csvFile.is_open())
     {
         std::cout << "File opened..." << std::endl;
+
+        unsigned int lineCount = 0;
+        while (std::getline(csvFile, line))
+        {
+            lineCount++;
+            std::cout << "Read line: " << line << std::endl;
+        }
+
+        std::cout << "total line count: " << lineCount << std::endl;
         csvFile.close();
     }
     else
