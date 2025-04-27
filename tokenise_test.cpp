@@ -69,11 +69,11 @@ int main()
                 std::cout << "This line has error!" << std::endl;
                 continue;
             }
-
-            for(std::string& t : tokens)
-            {
-                std::cout << t << std::endl;
-            }
+            // we have 5 tokens
+            double price = std::stod(tokens.at(3));
+            double amount = std::stod(tokens.at(4));
+            std::cout << price << ":" << amount << std::endl;
+          
         }
 
         std::cout << "total line count: " << lineCount << std::endl;
