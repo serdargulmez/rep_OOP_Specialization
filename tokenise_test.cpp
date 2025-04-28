@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include "OrderBookEntry.h"
 
 std::vector<std::string> tokenise(std::string csvLine, char separator)
 {
@@ -48,6 +49,12 @@ int main()
     //     std::cout << t << std::endl;
     // }
 
+    /*
+        You might have to adjust the contents of the csvFilename string, so it points to
+        the place where you have put the CSV file. E.g. if you put it in a temp folder
+        on your windows C drive:
+        std::string csvFilename{"C:\temp\20200317.csv"};
+    */
     std::ifstream csvFile{"Tokenising_test.csv"};
     std::string line;
     std::vector<std::string> tokens;
@@ -71,7 +78,11 @@ int main()
             }
             // we have 5 tokens
 
+            std::string timestamp = tokens[0];
+            std::string product = tokens[1];
+            // OrderBookType orderType = tokens[2];
             try{
+                
                 double price = std::stod(tokens[3]);
                 double amount = std::stod(tokens[4]);                
                 std::cout << price << ":" << amount << std::endl;
