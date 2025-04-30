@@ -1,118 +1,54 @@
 /*
---------------------------------------------------------------------------
---------------------------------------------------------------------------
---------------------------------------------------------------------------
---------------------------------------------------------------------------
+Annual Consumer Price Index
+Annual Consumer Price Index (CPI) for most countries in the world
 
+About this file
 
-#include <iostream>
-#include "OrderBookEntry.h"
-#include "MerkelMain.h"
-#include "identification.h"
+Suggest Edits
+Annual Consumer Price Index (CPI) for most countries
+in the world when it has been measured. The reference year
+is 2005 (meaning the value of CPI for all countries is 100
+and all other CPI values are relative to that year).
 
-using namespace std;
+Data
+The data comes from The World Bank and is collected from 1960 to 2011.
+There are some values missing from data so users of the data will
+have to guess what should be in the empty slots.
 
-int main()
-{
-    cout << "--- Program Started ! ---" << endl;
+The actual download happens via The World Bank's API (with csv as the requested format).
 
-    MerkelMain app{};
-    app.init();
-
-    // identification someone{};
-    // someone.init();
-
-    return 0;
-}
-
+Columns are 'Country,Country Code,Year,CPI'
 */
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <fstream>
-#include "OrderBookEntry.h"
 
-std::vector<std::string> tokenise(std::string csvLine, char separator)
-{
-    std::vector<std::string> tokens;
-    signed int start, end;
-    std::string token;
-    start = csvLine.find_first_not_of(separator, 0);
-    do
-    {
-        end = csvLine.find_first_of(separator, start);
-        if (start == csvLine.length() || start == end)
-            break;
-        if (end >= 0)
-            token = csvLine.substr(start, end - start);
-        else
-            token = csvLine.substr(start, csvLine.length() - start);
-        tokens.push_back(token);
-        start = end + 1;
-        //}while(end > 0);
-        // slight change from the video -
-        // find_first_of returns std::string::npos
-        // not 'less than zero'
-    } while (end != std::string::npos);
-    return tokens;
-}
+
+#include <iostream>
+#include <fstream>
+#include <string>
+// #include <vector>
+
 
 int main()
 {
-    std::string csvFilename{"Tokenising_test.csv"};
-    std::ifstream csvFile{csvFilename};
-    std::string line;
-    unsigned int lineCount = 0;
+    std::string csvFileName = "AnnualConsumerPrice.csv";
+    std::ifstream csvFile{csvFileName};
+    std::string row;
 
-    if (csvFile.is_open())
+    if(csvFile.is_open())
     {
-        std::cout << "Opened file: " << csvFilename << std::endl;
+        std::cout << "Opened file is: " << csvFileName << std::endl;
     }
     else
     {
-        std::cout << "Problem opening file " << csvFilename << std::endl;
+        std::cout << "File couldn't opened!" << std::endl;
     }
 
-    while (getline(csvFile, line))
-    {
-        lineCount++;
-        std::vector<std::string> tokens = tokenise(line, ',');
-        std::cout << "Read " << tokens.size() << " tokens " << std::endl;
-        // 2020/03/17 17:01:24.884492,ETH/BTC,bid,0.02187308,7.44564869
-        if (tokens.size() != 5)
-        {
-            std::cout << "Tokens size is invalid!" << std::endl;
-            break;
-        }
+    // row checked
+    // getline(csvFile,row);
+    // std::cout << "row: " << row << std::endl;
 
-        std::string timestamp = tokens[0];
-        std::string product = tokens[1];
+    
 
-        OrderBookType orderType;
-        if (tokens[2] == "bid")
-            orderType = OrderBookType::bid;
-        else
-            orderType = OrderBookType::ask;
-        try
-        {
-            double price = std::stod(tokens[3]);
-            double amount = std::stod(tokens[4]);
-        }
-        catch (std::exception &e)
-        {
-            continue;
-        }
-
-        for (std::string &t : tokens)
-        {
-            std::cout << t << std::endl;
-        }
-    }
-
-    std::cout << "Line counts are: " << lineCount << std::endl;
-
-    // don't forget to close it!
     csvFile.close();
     return 0;
 }
