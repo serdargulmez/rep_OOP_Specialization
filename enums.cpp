@@ -1,8 +1,10 @@
 #include <iostream>
 
-
-
-enum class OrderBookType{bid, ask};
+enum class OrderBookType
+{
+    bid,
+    ask
+};
 
 int main()
 {
@@ -12,5 +14,5 @@ int main()
     std::cout << "Program began......!" << std::endl;
     std::cout << "--------------------" << std::endl;
 
-    OrderBookType orderType = OrderBookType::ask;    
+    OrderBookType orderType = OrderBookType::ask;
 }
