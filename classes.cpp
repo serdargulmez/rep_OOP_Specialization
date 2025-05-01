@@ -5,9 +5,7 @@ class Square
     public:
         unsigned short side_1;
         unsigned short side_2;
-
-    // private:
-    //     unsigned int result(unsigned short s1, unsigned short s2);
+   
 };
 
 int main()
