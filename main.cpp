@@ -1,3 +1,0 @@
-/*
-    This branch is a practice.
-*/
