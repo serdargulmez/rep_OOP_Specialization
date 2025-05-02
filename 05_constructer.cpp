@@ -26,8 +26,15 @@ int main()
     squares.push_back(Square{4,6});
 
     
-    std::cout << "squ_01.side_1: " << squares[0].side_1 << std::endl;
-    std::cout << "squ_02.side_1: " << squares[1].side_1 << std::endl;   
+    // std::cout << "squ_01.side_1: " << squares[0].side_1 << std::endl;
+    // std::cout << "squ_02.side_1: " << squares[1].side_1 << std::endl;   
+
+    for(Square sq : squares)
+    {
+      std::cout << "squares side1: " << sq.side_1 << std::endl;
+    }
+
+
 
     return 0;
 }
