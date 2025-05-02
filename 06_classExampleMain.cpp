@@ -1,20 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <cmath>
-
-class Vec3D
-{
-public:
-    int getLength();
-    int x;
-    int y;
-    int z;
-};
-
-int Vec3D::getLength()
-{
-    return std::sqrt(x*x + y*y + z*z);
-}
+#include "06_classExampleHeader.h"
 
 int main()
 {
