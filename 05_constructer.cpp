@@ -29,7 +29,7 @@ int main()
     // std::cout << "squ_01.side_1: " << squares[0].side_1 << std::endl;
     // std::cout << "squ_02.side_1: " << squares[1].side_1 << std::endl;   
 
-    for(Square sq : squares)
+    for(Square& sq : squares)
     {
       std::cout << "squares side1: " << sq.side_1 << std::endl;
     }
