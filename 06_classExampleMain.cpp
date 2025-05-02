@@ -1,24 +1,31 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
+
 class Vec3D
 {
 public:
+    int getLength();
     int x;
     int y;
     int z;
 };
 
+int Vec3D::getLength()
+{
+    return std::sqrt(x*x + y*y + z*z);
+}
+
 int main()
 {
     Vec3D vec1;
-    vec1.x = 2;
-    vec1.y = 3;
-    vec1.z = 4;
+    vec1.x = 10;
+    vec1.y = 12;
+    vec1.z = 25;
 
-    std::vector<Vec3D> coords;
-    coords.push_back(vec1);
-    coords[0].x = 5;
+    int len = vec1.getLength();
+    std::cout << "Length: " << len << std::endl;
 
-    std::cout << coords[0].x << std::endl;
+
     return 0;
 }
