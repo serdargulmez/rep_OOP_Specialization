@@ -26,7 +26,7 @@ void identification::calculateWeight(int entryForCalculateAge)
 {
     switch (entryForCalculateAge)
     {
-    case 0 ... 20:
+    case 0:
         cout << "Weight is between 0-60." << endl;
         break;
     case 21:
