@@ -80,7 +80,7 @@ int main()
 
             std::string timestamp = tokens[0];
             std::string product = tokens[1];
-            // OrderBookType orderType = tokens[2];
+            OrderBookType orderType = OrderBookEntry::stringToOrderBookType(tokens[2]);
             try{
                 
                 double price = std::stod(tokens[3]);

@@ -6,7 +6,8 @@ using namespace std;
 enum class OrderBookType
 {
     bid,
-    ask
+    ask,
+    unknown
 };
 
 class OrderBookEntry
@@ -23,4 +24,6 @@ public:
     string timestamp;
     string product;
     OrderBookType orderType;
+
+    static OrderBookType stringToOrderBookType(const std::string &s);
 };
