@@ -2,7 +2,8 @@
 #include <iostream>
 #include <vector>
 #include "OrderBookEntry.h"
-using namespace std;
+#include "CSVReader.h"
+
 
 MerkelMain::MerkelMain()
 {
@@ -23,66 +24,75 @@ void MerkelMain::init()
 
 void MerkelMain::loadOrderBook()
 {
-    orders.push_back(OrderBookEntry{1000,
-                                    0.002,
-                                    "2020/03/17 17:01:24.884492",
-                                    "BTC/USDT",
-                                    OrderBookType::bid});
-
-    orders.push_back(OrderBookEntry{2000,
-                                    0.002,
-                                    "2020/03/17 17:01:24.884492",
-                                    "BTC/USDT",
-                                    OrderBookType::bid});
+    orders = CSVReader::readCSV("Tokenising.csv");
 }
 
 void MerkelMain::printMenu()
 {
-    cout << "1: Print Help" << endl;
-    cout << "2: Exchange Stats" << endl;
-    cout << "3: Make an Offer" << endl;
-    cout << "4: Make a Bid" << endl;
-    cout << "5: Print Wallet" << endl;
-    cout << "6: Continue" << endl;
-    cout << "====================================" << endl;
+    std::cout << "1: Print Help" << std::endl;
+    std::cout << "2: Exchange Stats" << std::endl;
+    std::cout << "3: Make an Offer" << std::endl;
+    std::cout << "4: Make a Bid" << std::endl;
+    std::cout << "5: Print Wallet" << std::endl;
+    std::cout << "6: Continue" << std::endl;
+    std::cout << "====================================" << std::endl;
 }
 
 void MerkelMain::printHelp()
 {
-    cout << "Your aim is to make money." << endl;
+    std::cout << "Your aim is to make money." << std::endl;
 }
 
 void MerkelMain::printMarketStats()
 {
-    cout << "OrderBook contains : " << orders.size() << " entries." << endl;
+    std::cout << "OrderBook contains : " << orders.size() << " entries." << std::endl;
+
+    unsigned int bids = 0;
+    unsigned int asks = 0;
+    
+    for(OrderBookEntry &e : orders)
+    {
+        if(e.orderType == OrderBookType::ask)
+        {
+            asks ++;
+        }
+        
+        if(e.orderType == OrderBookType::bid)
+        {
+            bids ++;
+        }
+    }
+
+    std::cout << "Ordertype asks: " << asks << ", Ordertype bids: " << bids << "." << std::endl;
+
 }
 
 void MerkelMain::enterOffer()
 {
-    cout << "Make an offer and enter the amount." << endl;
+    std::cout << "Make an offer and enter the amount." << std::endl;
 }
 
 void MerkelMain::enterBid()
 {
-    cout << "Make a bid and enter the amount." << endl;
+    std::cout << "Make a bid and enter the amount." << std::endl;
 }
 
 void MerkelMain::printWallet()
 {
-    cout << "Your wallet is empty." << endl;
+    std::cout << "Your wallet is empty." << std::endl;
 }
 
 void MerkelMain::gotoNextTimeFrame()
 {
-    cout << "Going to next time frame." << endl;
+    std::cout << "Going to next time frame." << std::endl;
 }
 
 int MerkelMain::getUserOption()
 {
     int userOption;
-    cout << "Type in 1-6" << endl;
+    std::cout << "Type in 1-6" << std::endl;
     cin >> userOption;
-    cout << "You chose: " << userOption << endl;
+    std::cout << "You chose: " << userOption << std::endl;
     return userOption;
 }
 
