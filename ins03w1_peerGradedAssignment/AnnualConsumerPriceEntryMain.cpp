@@ -62,9 +62,9 @@ std::vector<std::string> tokenise(std::string row, char separator)
 
 int main()
 {
-    std::string csvFileName = "AnnualConsumerPrice.csv";
+    std::string csvFileName = "./ins03w1_peerGradedAssignment/AnnualConsumerPrice.csv";
     std::ifstream csvFile{csvFileName};
-    std::string row;
+    std::string row = "";
     unsigned int totalRowCount = 0;
     unsigned int invalidRowCount = 0;
     unsigned int validRowCount = 0;
@@ -81,14 +81,16 @@ int main()
 
     while (getline(csvFile, row))
     {
-        totalRowCount++;
-        // std::cout << "Row " << totalRowCount << ": " << row << std::endl;
-        std::vector<std::string> tokens = tokenise(row, ',');
-
         std::string countryName = "";
         std::string countryCode = "";
         unsigned int year = 0;
         double price = 0;
+
+        totalRowCount++;
+        // std::cout << "Row " << totalRowCount << ": " << row << std::endl;
+        std::vector<std::string> tokens = tokenise(row, ',');
+
+        
 
         if (tokens.size() != 4)
         {
@@ -109,7 +111,7 @@ int main()
             year = std::stoi(tokens[2]);
             price = std::stod(tokens[3]);
         }
-        catch (std::exception &e)
+        catch (const std::exception &e)
         {
             invalidRowCount++;
             validRowCount--;
