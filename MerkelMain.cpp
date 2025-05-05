@@ -3,6 +3,7 @@
 #include <vector>
 #include "OrderBookEntry.h"
 #include "CSVReader.h"
+#include <map>
 
 
 MerkelMain::MerkelMain()
@@ -38,25 +39,10 @@ void MerkelMain::printHelp()
 
 void MerkelMain::printMarketStats()
 {
-    // std::cout << "OrderBook contains : " << orders.size() << " entries." << std::endl;
-
-    // unsigned int bids = 0;
-    // unsigned int asks = 0;
-    
-    // for(OrderBookEntry &e : orders)
-    // {
-    //     if(e.orderType == OrderBookType::ask)
-    //     {
-    //         asks ++;
-    //     }
-        
-    //     if(e.orderType == OrderBookType::bid)
-    //     {
-    //         bids ++;
-    //     }
-    // }
-
-    // std::cout << "Ordertype asks: " << asks << ", Ordertype bids: " << bids << "." << std::endl;
+    for(std::string const p : orderbook.getKnownProducts())
+    {
+        std::cout << "Product: " << p << std::endl;
+    }
 
 }
 
