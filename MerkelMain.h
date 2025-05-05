@@ -2,16 +2,16 @@
 
 #include <vector>
 #include "OrderBookEntry.h"
+#include "OrderBook.h"
 class MerkelMain
 {
 
 public:
     MerkelMain();
-    //** Call this to start sim */
+    //** Call this function to start simulation */
     void init();
 
 private:
-    void loadOrderBook();
     void printMenu();
     void printHelp();
     void printMarketStats();
@@ -22,5 +22,6 @@ private:
     int getUserOption();
     void processUserOption(int userOption);
 
-    vector<OrderBookEntry> orders;
+    OrderBook orderbook{"Tokenising.csv"};
+    
 };
