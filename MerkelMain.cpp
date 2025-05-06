@@ -48,8 +48,8 @@ void MerkelMain::printMarketStats()
                                                                   "2020/03/17 17:01:24.884492");
         
         std::cout << "Asks: " << entries.size() << std::endl;
-        std::cout << "Max Ask: " << OrderBook::getHighPrice(entries) << std::endl;                                      
-        std::cout << "Min Ask: " << OrderBook::getLowPrice(entries) << std::endl;
+        std::cout << "Max Ask: " << orderbook.getHighPrice(entries) << std::endl;                                      
+        std::cout << "Min Ask: " << orderbook.getLowPrice(entries) << std::endl;
     }
 
 }
