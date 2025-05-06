@@ -39,9 +39,15 @@ void MerkelMain::printHelp()
 
 void MerkelMain::printMarketStats()
 {
+    
     for(std::string const p : orderbook.getKnownProducts())
     {
         std::cout << "Product: " << p << std::endl;
+        std::vector<OrderBookEntry> entries = orderbook.getOrders(OrderBookType::ask,
+                                                                  p,
+                                                                  "2020/03/17 17:01:24.884492");
+        
+        std::cout << "Asks: " << entries.size() << std::endl;                                      
     }
 
 }
