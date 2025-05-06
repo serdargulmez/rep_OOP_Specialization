@@ -15,8 +15,9 @@ public:
     std::vector<OrderBookEntry> getOrders(OrderBookType type,
                                           std::string product,
                                           std::string timestamp);
-
+    /** return the max price according to product */
     static double getHighPrice(std::vector<OrderBookEntry> &orders);
+    /** return the min price according to product */
     static double getLowPrice(std::vector<OrderBookEntry> &orders);
 
 private:
