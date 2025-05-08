@@ -20,6 +20,13 @@ public:
     /** return the min price according to product */
     static double getLowPrice(std::vector<OrderBookEntry> &orders);
 
+    /** returns the earliest time in the orderbook */
+    std::string getEarliestTime();
+    /** returns the next time after the sent time in the orderbook
+     *  if there is no next timestamp, wraps around to the start
+     */
+    std::string getNextTime(std::string timestamp);
+
 private:
     std::vector<OrderBookEntry> orders;
 };

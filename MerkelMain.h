@@ -22,6 +22,8 @@ private:
     int getUserOption();
     void processUserOption(int userOption);
 
+    std::string currentTime;
+
     OrderBook orderbook{"Tokenising.csv"};
     
 };
