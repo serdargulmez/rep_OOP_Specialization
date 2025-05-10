@@ -2,16 +2,16 @@
 
 #include <vector>
 #include "OrderBookEntry.h"
+#include "OrderBook.h"
 class MerkelMain
 {
 
 public:
     MerkelMain();
-    //** Call this to start sim */
+    //** Call this function to start simulation */
     void init();
 
 private:
-    void loadOrderBook();
     void printMenu();
     void printHelp();
     void printMarketStats();
@@ -21,6 +21,10 @@ private:
     void gotoNextTimeFrame();
     int getUserOption();
     void processUserOption(int userOption);
+    void printChanges();
 
-    vector<OrderBookEntry> orders;
+    std::string currentTime;
+
+    OrderBook orderbook{"Tokenising.csv"};
+    
 };
