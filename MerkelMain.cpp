@@ -32,6 +32,7 @@ void MerkelMain::printMenu()
     std::cout << "6: Continue" << std::endl;
     std::cout << "====================================" << std::endl;
     std::cout << "Current time is: " << currentTime << std::endl;
+    std::cout << "7: Print Changes" << std::endl;
 }
 
 void MerkelMain::printHelp()
@@ -112,4 +113,24 @@ void MerkelMain::processUserOption(int userOption)
     {
         gotoNextTimeFrame();
     }
+    else if (userOption == 7)
+    {
+        printChanges();
+    }
+}
+
+void MerkelMain::printChanges()
+{
+    std::cout << "Changes are:" << std::endl;
+
+    for(std::string const p : orderbook.getKnownProducts())
+    {
+        std::cout << "Product: " << p << std::endl;
+        std::vector<OrderBookEntry> entries = orderbook.getOrders(OrderBookType::ask,
+                                                                  p,
+                                                                  currentTime);
+        
+        std::cout << "Changes: %" << orderbook.getChange(entries) << std::endl;                                                    
+                                                                        
+    }   
 }
