@@ -4,6 +4,8 @@
 #include "OrderBookEntry.h"
 #include "CSVReader.h"
 #include <map>
+#include<limits>
+
 
 
 MerkelMain::MerkelMain()
@@ -26,7 +28,7 @@ void MerkelMain::printMenu()
 {
     std::cout << "1: Print Help" << std::endl;
     std::cout << "2: Exchange Stats" << std::endl;
-    std::cout << "3: Make an Offer" << std::endl;
+    std::cout << "3: Make an Ask" << std::endl;
     std::cout << "4: Make a Bid" << std::endl;
     std::cout << "5: Print Wallet" << std::endl;
     std::cout << "6: Continue" << std::endl;
@@ -57,9 +59,13 @@ void MerkelMain::printMarketStats()
 
 }
 
-void MerkelMain::enterOffer()
+void MerkelMain::enterAsk()
 {
-    std::cout << "Make an offer and enter the amount." << std::endl;
+    std::cout << "Make an ask and enter the amount: product,price,amount eg ETH/BTC,200,0.5" << std::endl;
+    std::string input;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n' );
+    std::getline(std::cin, input);
+    std::cout << "You typed: " << input << std::endl;
 }
 
 void MerkelMain::enterBid()
@@ -99,7 +105,7 @@ void MerkelMain::processUserOption(int userOption)
     }
     else if (userOption == 3)
     {
-        enterOffer();
+        enterAsk();
     }
     else if (userOption == 4)
     {
