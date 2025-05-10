@@ -21,6 +21,7 @@ private:
     void gotoNextTimeFrame();
     int getUserOption();
     void processUserOption(int userOption);
+    void printChanges();
 
     std::string currentTime;
 
