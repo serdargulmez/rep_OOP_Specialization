@@ -26,4 +26,8 @@ public:
     OrderBookType orderType;
 
     static OrderBookType stringToOrderBookType(const std::string &s);
+    static bool compareByTimestamp(OrderBookEntry &e1, OrderBookEntry &e2)
+    {
+        return e1.timestamp < e2.timestamp;
+    }
 };

@@ -79,6 +79,7 @@ void MerkelMain::enterAsk()
                                                         currentTime,
                                                         tokens[0],
                                                         OrderBookType::ask);
+            orderbook.insertOrder(obe);
         }
         catch(const std::exception &e)
         {
@@ -147,24 +148,5 @@ void MerkelMain::processUserOption(int userOption)
     {
         gotoNextTimeFrame();
     }
-    else if (userOption == 7)
-    {
-        printChanges();
-    }
 }
 
-void MerkelMain::printChanges()
-{
-    std::cout << "Changes are:" << std::endl;
-
-    for(std::string const p : orderbook.getKnownProducts())
-    {
-        std::cout << "Product: " << p << std::endl;
-        std::vector<OrderBookEntry> entries = orderbook.getOrders(OrderBookType::ask,
-                                                                  p,
-                                                                  currentTime);
-        
-        std::cout << "Changes: %" << orderbook.getChange(entries) << std::endl;                                                    
-                                                                        
-    }   
-}

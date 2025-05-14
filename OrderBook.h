@@ -26,8 +26,8 @@ public:
      *  if there is no next timestamp, wraps around to the start
      */
     std::string getNextTime(std::string timestamp);
-    /** returns changes range from low and high price differences */
-    static double getChange(std::vector<OrderBookEntry> &orders);
+    
+    void insertOrder(OrderBookEntry &order);
 
 private:
     std::vector<OrderBookEntry> orders;

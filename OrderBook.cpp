@@ -1,5 +1,6 @@
 #include "OrderBook.h"
 #include <map>
+#include <algorithm>
 
 OrderBook::OrderBook(std::string filename)
 {
@@ -96,37 +97,9 @@ std::string OrderBook::getNextTime(std::string timestamp)
 
 }
 
-/*
-    Purpose: To calculate change value as a percentage to identify
-             volatile range in prices.
-             Transmitter knows price increment and decrement. 
-    Definition: Input parameter is orders as a reference.
-                Code evaulate the input "orders" parameter to find
-                max price and low price by already created
-                OrderBook::getHighPrice(orders) and
-                OrderBook::getLowPrice(orders) functions in the OrderBook Class.
-                And so with percentage calculation increment and
-                decrement about prices are sent to the user.
-
-*/
-double OrderBook::getChange(std::vector<OrderBookEntry> &orders)
+void OrderBook::insertOrder(OrderBookEntry &order)
 {
-    const unsigned short perValue = 100;
-    double maxPrice = OrderBook::getHighPrice(orders); // max price is received
-    double minPrice = OrderBook::getLowPrice(orders); // min price is received
-    double percentage = 0.0;
+    orders.push_back(order);  
+    std::sort(orders.begin(), orders.end(), OrderBookEntry::compareByTimestamp);
 
-    if (maxPrice > minPrice)
-    {
-        // change range is calculated as percentage for increment
-        percentage = (( maxPrice / minPrice ) * perValue) - perValue;
-    }
-    else
-    {
-        // change range is calculated as percentage for decrement
-        percentage = (( minPrice / maxPrice ) * perValue) - perValue;
-        percentage *= -1; // for decrement value is showed with a negative number
-    }
-
-    return percentage; // percentage is sent
 }
