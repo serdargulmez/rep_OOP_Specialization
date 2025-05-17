@@ -34,7 +34,6 @@ void MerkelMain::printMenu()
     std::cout << "6: Continue" << std::endl;
     std::cout << "====================================" << std::endl;
     std::cout << "Current time is: " << currentTime << std::endl;
-    std::cout << "7: Print Changes" << std::endl;
 }
 
 void MerkelMain::printHelp()
@@ -55,6 +54,15 @@ void MerkelMain::printMarketStats()
         std::cout << "Asks: " << entries.size() << std::endl;
         std::cout << "Max Ask: " << orderbook.getHighPrice(entries) << std::endl;                                      
         std::cout << "Min Ask: " << orderbook.getLowPrice(entries) << std::endl;
+
+            
+        entries = orderbook.getOrders(OrderBookType::bid,
+                                                                  p,
+                                                                  currentTime);
+        
+        std::cout << "Bids: " << entries.size() << std::endl;
+        std::cout << "Max Bid: " << orderbook.getHighPrice(entries) << std::endl;                                      
+        std::cout << "Min Bid: " << orderbook.getLowPrice(entries) << std::endl;
     }
 
 }
@@ -91,7 +99,32 @@ void MerkelMain::enterAsk()
 
 void MerkelMain::enterBid()
 {
-    std::cout << "Make a bid and enter the amount." << std::endl;
+    std::cout << "Make a bid and enter the amount: product,price,amount eg ETH/BTC,200,0.5" << std::endl;
+    std::string input;
+    std::getline(std::cin, input);
+    std::vector<string> tokens = CSVReader::tokenise(input,',');
+
+    if(tokens.size() != 3)
+    {
+        std::cout << "MerkelMain::enterBid(): Bad input! : " << input << std::endl;
+    }
+    else
+    {
+        std::cout << "You typed: " << input << std::endl;
+        try{
+            OrderBookEntry obe = CSVReader::stringToOBE(tokens[1],
+                                                        tokens[2],
+                                                        currentTime,
+                                                        tokens[0],
+                                                        OrderBookType::bid);
+            orderbook.insertOrder(obe);
+        }
+        catch(const std::exception &e)
+        {
+            std::cout << "MerkelMain::enterBid(): Bad input! : " << input << std::endl;
+        }
+        
+    }
 }
 
 void MerkelMain::printWallet()
