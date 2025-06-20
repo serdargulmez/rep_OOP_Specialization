@@ -56,9 +56,9 @@ void MerkelMain::printMarketStats()
         std::cout << "Min Ask: " << orderbook.getLowPrice(entries) << std::endl;
 
             
-        entries = orderbook.getOrders(OrderBookType::bid,
-                                                                  p,
-                                                                  currentTime);
+        entries = orderbook.getOrders(  OrderBookType::bid,
+                                        p,
+                                        currentTime);
         
         std::cout << "Bids: " << entries.size() << std::endl;
         std::cout << "Max Bid: " << orderbook.getHighPrice(entries) << std::endl;                                      
