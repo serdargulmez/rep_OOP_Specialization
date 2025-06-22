@@ -3,6 +3,8 @@
 #include <vector>
 #include "OrderBookEntry.h"
 #include "OrderBook.h"
+#include "Wallet.h"
+
 class MerkelMain
 {
 
@@ -25,5 +27,5 @@ private:
     std::string currentTime;
 
     OrderBook orderbook{"test.csv"};
-    
+    Wallet wallet;    
 };
