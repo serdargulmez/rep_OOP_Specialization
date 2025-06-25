@@ -22,7 +22,9 @@ int main()
 
     Wallet wallet;
     wallet.insertCurrency("BTC", 10);
-    std::cout << "wallet has BTC " << wallet.containsCurrency("USDT", 10) << std::endl;
+    wallet.insertCurrency("USDT", 50);
+    std::cout << wallet.toString() << std::endl;
+    wallet.removeCurrency("BTC", 9);
     std::cout << wallet.toString() << std::endl;
 
     return 0;

@@ -11,7 +11,7 @@ void Wallet::insertCurrency(std::string type, double amount)
     {
         throw std::exception{};
     }
-    if (currencies.count(type) == 0)
+    if (currencies.count(type) == 0) // not there yet
     {
         balance = 0;
     }
@@ -21,6 +21,28 @@ void Wallet::insertCurrency(std::string type, double amount)
     }
     balance += amount;
     currencies[type] = balance;
+}
+
+bool Wallet::removeCurrency(std::string type, double amount)
+{
+    if (amount < 0)
+    {
+        return false;
+    }
+    if (currencies.count(type) == 0) // not there yet
+    {
+        return false;
+    }
+    else // is there - do we have enough
+    {
+        if (containsCurrency(type, amount)) // we have enough
+        {
+            currencies[type] -= amount;
+            return true;
+        }
+        else // they have it but not enough.
+            return false;
+    }
 }
 
 bool Wallet::containsCurrency(std::string type, double amount)
@@ -33,5 +55,12 @@ bool Wallet::containsCurrency(std::string type, double amount)
 
 std::string Wallet::toString()
 {
-    return "oink";
+    std::string s;
+    for (std::pair<std::string, double> pair : currencies)
+    {
+        std::string currency = pair.first;
+        double amount = pair.second;
+        s += currency + " : " + std::to_string(amount) + "\n";
+    }
+    return s;
 }
